@@ -11,11 +11,16 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    double itemWidth = MediaQuery.of(context).size.width * 0.6;
+    if (MediaQuery.of(context).orientation == Orientation.landscape) {
+      itemWidth = MediaQuery.of(context).size.width * 0.3;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Menu')
       ),
-      body: const ShowItems()
+      body: ShowItems(itemWidth: itemWidth)
     );
   }
 }
