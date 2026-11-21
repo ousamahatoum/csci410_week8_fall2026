@@ -4,11 +4,12 @@ class Item {
   String name;
   double price;
   String image;
+  bool selected = false;
 
   Item(this.name, this.price, this.image);
 }
 
-List<Item> items = [
+List<Item> _items = [
   Item('Burger', 7, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=999&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D'),
   Item('Pizza', 10, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D'),
   Item('Salad', 6, 'https://images.unsplash.com/photo-1607532941433-304659e8198a?q=80&w=1078&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D'),
@@ -17,20 +18,22 @@ List<Item> items = [
 
 class ShowItems extends StatelessWidget {
   final double itemWidth;
-  const ShowItems({required this.itemWidth, super.key});
+  final Function(Item, bool) addItem;
+  const ShowItems({required this.addItem, required this.itemWidth, super.key});
 
   @override
   Widget build(BuildContext context) {
     final TextStyle itemText = TextStyle(fontSize: itemWidth * 0.1);
     return ListView.builder(
-        itemCount: items.length,
+        itemCount: _items.length,
         itemBuilder: (context, index) {
           return Padding(padding: EdgeInsets.all(itemWidth * 0.01), child: Align(alignment: Alignment.topCenter,
-              child: Container(width: itemWidth, color: index % 2 == 0 ? Colors.grey.shade100 : Colors.grey.shade300,
+              child: Container(width: itemWidth, color: index % 2 == 0 ? Colors.grey.shade200 : Colors.grey.shade300,
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text('Name: ${items[index].name}', style: itemText),
-                  Text('Price: \$${items[index].price}', style: itemText),
-                  Image.network(items[index].image)
+                  Text('Name: ${_items[index].name}', style: itemText),
+                  Text('Price: \$${_items[index].price}', style: itemText),
+                  Image.network(_items[index].image),
+                  Center(child: Checkbox(value: _items[index].selected, onChanged: (value) => addItem(_items[index], value as bool)))
           ]
           ))));
         }

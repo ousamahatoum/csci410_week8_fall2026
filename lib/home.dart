@@ -9,6 +9,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  double total = 0;
+
+  void addItem(Item item, bool selected) {
+   setState(() {
+     item.selected = selected;
+     if (selected) {
+       total += item.price;
+     }
+     else {
+       total -= item.price;
+     }
+   });
+  }
   @override
   Widget build(BuildContext context) {
     double itemWidth = MediaQuery.of(context).size.width * 0.6;
@@ -18,9 +31,9 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Menu')
+        title: Text('Total \$$total')
       ),
-      body: ShowItems(itemWidth: itemWidth)
+      body: ShowItems(addItem: addItem, itemWidth: itemWidth)
     );
   }
 }
