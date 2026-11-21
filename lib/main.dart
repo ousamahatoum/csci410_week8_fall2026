@@ -17,10 +17,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'csci410 week 8',
-      home: Home(),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.grey.shade50,
+        appBarTheme: AppBarThemeData(
+          centerTitle: true,
+          backgroundColor: Colors.grey.shade900,
+          foregroundColor: Colors.white
+        )
+      ),
+      home: Home()
     );
   }
 }
