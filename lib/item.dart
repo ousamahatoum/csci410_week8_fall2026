@@ -16,6 +16,10 @@ List<Item> _items = [
   Item('Fresh Juice', 5, 'https://images.unsplash.com/photo-1603569283847-aa295f0d016a?q=80&w=1072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D'),
 ];
 
+void resetItems() {
+  _items.forEach((item) => item.selected = false);
+}
+
 class ShowItems extends StatelessWidget {
   final double itemWidth;
   final Function(Item, bool) addItem;

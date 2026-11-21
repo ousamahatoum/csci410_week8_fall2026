@@ -31,7 +31,13 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Total \$$total')
+        title: Text('Total \$$total'),
+        actions: [
+          IconButton(onPressed: () => setState(() {
+            resetItems();
+            total = 0;
+          }), icon: Icon(Icons.restore))
+        ],
       ),
       body: ShowItems(addItem: addItem, itemWidth: itemWidth)
     );
